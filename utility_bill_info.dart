@@ -3,8 +3,11 @@
 
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
+import 'package:dart_console/dart_console.dart';
 
 void main() async {
+  final console = Console();
+  console.writeLine('Made by: ', TextAlignment.right);
 // ---------------------Variables of Elecltricity Bill----------------------
   void electricityBill() async {
     final response = await http.get(
@@ -37,7 +40,8 @@ void main() async {
         .text);
     String _adj_address() {
       var removeSpaces = homeAddress.replaceAll(RegExp(r'\s+'), '*');
-      var newAddress = removeSpaces.replaceAll(RegExp(r'\*'), ' ').substring(1);
+      var newAddress =
+          removeSpaces.replaceAll(RegExp(r'\*'), ' ').substring(15);
       return newAddress;
     }
     //-------------------------END-------------------------------------------
@@ -89,10 +93,10 @@ void main() async {
     print('Payable After Due Date: Rs: ' +
         payableAfterDueDate.replaceAll(RegExp(r'\s+'), ''));
     print('Address: ' + address());
-    print('----------------------------------------------------\n\n\n');
+    print('--------------------------------------------------\n\n\n');
   }
 
   gasBill();
   electricityBill();
-  await new Future.delayed(const Duration(seconds: 90));
+  await new Future.delayed(const Duration(seconds: 300));
 }
